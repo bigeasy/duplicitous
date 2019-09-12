@@ -22,5 +22,6 @@ jobs:
         npm install --no-package-lock
         npm install nyc mocha
         node_modules/.bin/nyc npm test
+        sleep 1
       env:
         CI: true
