@@ -22,6 +22,7 @@ jobs:
         npm install --no-package-lock
         npm install nyc mocha --no-package-lock
         node_modules/.bin/nyc npm test
+        ls
         echo find .nyc_output
         find .nyc_output
         echo find coverage
