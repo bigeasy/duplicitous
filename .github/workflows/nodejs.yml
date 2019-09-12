@@ -20,12 +20,19 @@ jobs:
     - name: npm install, build, and test
       run: |
         npm install --no-package-lock
-        npm install nyc mocha
+        npm install nyc mocha --no-package-lock
         node_modules/.bin/nyc npm test
+        echo find .nyc_output
         find .nyc_output
+        echo find coverage
         find coverage
         sleep 1
+        echo report
         node_modules/.bin/nyc report --reporter=text
+        echo report
+        sleep 1
+        echo report
         node_modules/.bin/nyc report --reporter=text
+        sleep 1
       env:
         CI: true
