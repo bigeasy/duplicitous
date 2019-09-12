@@ -23,5 +23,7 @@ jobs:
         npm install nyc mocha
         node_modules/.bin/nyc npm test
         sleep 1
+        node_modules/.bin/nyc report --reporter=text
+        node_modules/.bin/nyc report --reporter=text
       env:
         CI: true
