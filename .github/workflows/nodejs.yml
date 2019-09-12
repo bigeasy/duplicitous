@@ -20,8 +20,8 @@ jobs:
     - name: npm install
       run: npm install --no-package-lock
     - name: npm install mocha, nyc
-      run: npm install nyc mocha --no-package-lock
+      run: npm install -g nyc mocha
     - name: npm run nyc
-      run: node_modules/.bin/nyc npm test
+      run: nyc npm test
       env:
         CI: true
