@@ -19,6 +19,6 @@ describe('duplicitous', () => {
         // console.log('await outward')
         await outward
         assert.equal(output.read(1), 'o', 'written')
-        console.log('done')
+        // console.log('done')
     })
 })
