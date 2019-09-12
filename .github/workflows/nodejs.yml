@@ -21,6 +21,6 @@ jobs:
       run: |
         npm install --no-package-lock
         npm install -g nyc mocha
-        nyc npm test
+        npm test
       env:
         CI: true
