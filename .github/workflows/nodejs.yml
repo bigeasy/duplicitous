@@ -19,9 +19,15 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: npm install
       run: npm install --no-package-lock
-    - name: npm install mocha, nyc
-      run: npm install -g nyc mocha
-    - name: npm run nyc
+    - name: npm install nyc, mocha, codecov
+      run:  npm install -g nyc mocha codecov
+    - name: npm test
       run: nyc npm test
       env:
         CI: true
+    - name: generate codecov report
+      run: nyc report --reporter=text-lcov > coverage.lcov
+    - name: ship coverage to codecov
+      run: codecov
+      env:
+        CODECOV_TOKEN: ${{secrets.CODECOV_TOKEN}}
