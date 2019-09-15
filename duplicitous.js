@@ -7,11 +7,15 @@ class Duplicitous extends stream.Duplex {
         super(options)
         this._input = input
         this._output = output
+        this._ended = false
+        this._input.once('end', this._ended = true)
     }
 
     _read (size) {
         const buffer = this._input.read(null)
-        if (buffer == null) {
+        if (buffer != null || this._ended) {
+            this.push(buffer)
+        } else {
             const readable = () => {
                 this._input.removeListener('readable', readable)
                 this._input.removeListener('end', readable)
@@ -19,8 +23,6 @@ class Duplicitous extends stream.Duplex {
             }
             this._input.on('end', readable)
             this._input.on('readable', readable)
-        } else {
-            this.push(buffer)
         }
     }
 
