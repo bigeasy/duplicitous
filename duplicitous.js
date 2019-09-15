@@ -8,7 +8,7 @@ class Duplicitous extends stream.Duplex {
         this._input = input
         this._output = output
         this._ended = false
-        this._input.once('end', this._ended = true)
+        this._input.once('end', () => this._ended = true)
     }
 
     _read (size) {
