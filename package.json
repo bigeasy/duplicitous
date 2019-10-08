@@ -24,11 +24,12 @@
     },
     "devDependencies":
     {
+                            "proof":                        "^8.0.0-alpha.7",
                             "prospective":                  "0.1.0-alpha.1"
     },
     "main":                 "duplicitous",
     "scripts":
     {
-                            "test": "mocha"
+                            "test": "proof test/*.test.js"
     }
 }
