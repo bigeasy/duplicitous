@@ -1,5 +1,5 @@
 require('proof')(4, async (okay) => {
-    const once = require('prospective/once')
+    const once = require('eject')
     const stream = require('stream')
     const Duplicitous = require('../duplicitous')
     const input = new stream.PassThrough

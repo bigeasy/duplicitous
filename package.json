@@ -24,8 +24,8 @@
     },
     "devDependencies":
     {
-                            "proof":                        "^9.0.1",
-                            "prospective":                  "^0.3.0"
+                            "eject":                        "0.2.3",
+                            "proof":                        "^9.0.1"
     },
     "main":                 "duplicitous",
     "scripts":
