@@ -14,12 +14,17 @@ A mock duplex stream.
 | Coverage:     | https://codecov.io/gh/bigeasy/duplicitous         |
 | License:      | MIT                                               |
 
+
 ```
+//{ "mode": "text" }
 npm install duplicitous
 ```
 
 ```javascript
-require('proof')(4, async okay => {
+//{ "code": { "tests": 4 }, "text": { "tests": 4  } }
+require('proof')(%(tests)d, async okay => {
+    //{ "include": "testRequire" }
+    //{ "include": "test" }
     okay('always okay')
     okay(true, 'okay if true')
     okay(1, 1, 'okay if equal')
