@@ -38,6 +38,7 @@ class Duplicitous extends stream.Duplex {
         } else {
             this.output.write(chunk, 'utf8')
         }
+        callback()
     }
 }
 
