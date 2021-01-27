@@ -2,33 +2,42 @@ const coalesce = require('extant')
 const stream = require('stream')
 const assert = require('assert')
 
+
 class Duplicitous extends stream.Duplex {
-    constructor (input, output, options = {}) {
+    constructor (options = {}) {
         super(options)
-        this._input = input
-        this._output = output
-        this._ended = false
-        this._input.once('end', () => this._ended = true)
+        this.input = new stream.PassThrough
+        this.output = new stream.PassThrough
+        this.input.on('end', () => this.push(null))
+        this.input.on('readable', () => this._pull())
+        this.output.on('drain', () => this.emit('drain'))
+        this.output.on('finish', () => this.emit('finish'))
     }
 
-    _read (size) {
-        const buffer = this._input.read(null)
-        if (buffer != null || this._ended) {
-            this.push(buffer)
-        } else {
-            const readable = () => {
-                this._input.removeListener('readable', readable)
-                this._input.removeListener('end', readable)
-                this._read(size)
+    _pull () {
+        for (;;) {
+            const buffer = this.input.read()
+            if (buffer == null) {
+                break
             }
-            this._input.on('end', readable)
-            this._input.on('readable', readable)
+            this._size -= buffer.length
+            if (! this.push(buffer) || this._size <= 0) {
+                break
+            }
         }
     }
 
+    _read (size) {
+        this._size = size
+        return true
+    }
+
     _write (chunk, encoding, callback) {
-        assert.equal(encoding, 'buffer', 'encoding is not buffer')
-        this._output.write(chunk, callback)
+        if (Buffer.isBuffer(chunk)) {
+            this.output.write(chunk)
+        } else {
+            this.output.write(chunk, 'utf8')
+        }
     }
 }
 
