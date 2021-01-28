@@ -1,7 +1,5 @@
-const coalesce = require('extant')
-const stream = require('stream')
 const assert = require('assert')
-
+const stream = require('stream')
 
 class Duplicitous extends stream.Duplex {
     constructor (options = {}) {
@@ -10,8 +8,7 @@ class Duplicitous extends stream.Duplex {
         this.output = new stream.PassThrough
         this.input.on('end', () => this.push(null))
         this.input.on('readable', () => this._pull())
-        this.output.on('drain', () => this.emit('drain'))
-        this.output.on('finish', () => this.emit('finish'))
+        this.on('finish', () => this.output.end())
     }
 
     _pull () {
@@ -33,11 +30,8 @@ class Duplicitous extends stream.Duplex {
     }
 
     _write (chunk, encoding, callback) {
-        if (Buffer.isBuffer(chunk)) {
-            this.output.write(chunk)
-        } else {
-            this.output.write(chunk, 'utf8')
-        }
+        assert(encoding == 'buffer')
+        this.output.write(chunk)
         callback()
     }
 }
