@@ -47,7 +47,7 @@ node test/readme.t.js
 The `'duplicitous'` module exports a single `Duplex` object.
 
 ```javascript
-const Duplex = require('duplicitous')
+const { Duplex } = require('duplicitous')
 ```
 
 Duplicitous is a mock Duplex stream. It has two through streams properties.

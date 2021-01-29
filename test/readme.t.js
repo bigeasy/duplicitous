@@ -22,7 +22,7 @@
 // generally looks like this.
 
 require('proof')(4, async okay => {
-    const Duplex = require('..')
+    const { Duplex } = require('..')
 
     // Duplicitous is a mock Duplex stream. It has two through streams properties.
     // You use `input` to write what the duplex stream reads. You use `output` to read

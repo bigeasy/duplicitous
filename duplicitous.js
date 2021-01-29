@@ -1,7 +1,7 @@
 const assert = require('assert')
 const stream = require('stream')
 
-class Duplicitous extends stream.Duplex {
+class Duplex extends stream.Duplex {
     constructor (options = {}) {
         super(options)
         this.input = new stream.PassThrough
@@ -36,4 +36,4 @@ class Duplicitous extends stream.Duplex {
     }
 }
 
-module.exports = Duplicitous
+exports.Duplex = Duplex

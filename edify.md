@@ -58,12 +58,12 @@ The `'duplicitous'` module exports a single `Duplex` object.
 
 ```javascript
 //{ "mode": "text" }
-const Duplex = require('duplicitous')
+const { Duplex } = require('duplicitous')
 ```
 
 ```javascript
 //{ "name": "test", "mode": "code" }
-const Duplex = require('..')
+const { Duplex } = require('..')
 ```
 
 Duplicitous is a mock Duplex stream. It has two through streams properties.

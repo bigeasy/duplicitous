@@ -1,5 +1,5 @@
 require('proof')(1, async okay => {
-    const Duplex = require('../duplicitous')
+    const { Duplex } = require('../duplicitous')
     const duplex = new Duplex({ readableHighWaterMark: 1 })
 
     duplex.input.write('a')

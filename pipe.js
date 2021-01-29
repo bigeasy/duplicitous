@@ -1,5 +1,5 @@
 const stream = require('stream')
-const Duplicitous = require('./duplicitous')
+const { Duplex } = require('./duplicitous')
 
 class Pipe {
     constructor (up = {}, down = {}) {
@@ -7,8 +7,8 @@ class Pipe {
             up: new stream.PassThrough(up) ,
             down: new stream.PassThrough(down)
         }
-        this.client = new Duplicitous(pipe.down, pipe.up)
-        this.server = new Duplicitous(pipe.up, pipe.down)
+        this.client = new Duplex(pipe.down, pipe.up)
+        this.server = new Duplex(pipe.up, pipe.down)
     }
 }
 
