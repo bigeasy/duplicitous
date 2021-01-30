@@ -1,6 +1,6 @@
 {
     "name":                 "duplicitous",
-    "version":              "0.2.6",
+    "version":              "0.2.7",
     "description":
 
       "Pseudo duplex stream implementation to create mock sockets for unit tests.",
