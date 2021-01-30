@@ -84,12 +84,29 @@ require('proof')(4, async okay => {
 
         okay(String(duplex.output.read()), 'ab', 'write with drain')
     }
+
+    // Note that `Duplex.output` has no high water mark set so it will not apply
+    // back-pressure on the `Duplex` writable stream. This doesn't matter.
+    //
+    // As a final note, I've found a class like this mock Net module to be helpful in
+    // unit tests.
+
+    class Net {
+        constructor () {
+            this.client = new Duplex
+            this.server = new Duplex
+            this.client.output.pipe(this.server.input)
+            this.server.output.pipe(this.client.input)
+            this.client.unref = () => {}
+        }
+
+        connect (path) {
+            return this.client
+        }
+    }
 })
 
 // You can run this unit test yourself to see the output from the various
 // code sections of the readme.
 
 // The `'duplicitous'` module exports a single `Duplex` object.
-
-// Note that `Duplex.output` has no high water mark set so it will not apply
-// back-pressure on the `Duplex` writable stream. This doesn't matter.
