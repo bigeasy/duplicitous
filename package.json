@@ -23,7 +23,7 @@
     },
     "devDependencies":
     {
-                            "eject":                        "0.2.3",
+                            "eject":                        "0.3.0",
                             "proof":                        "^9.0.1"
     },
     "main":                 "duplicitous",
